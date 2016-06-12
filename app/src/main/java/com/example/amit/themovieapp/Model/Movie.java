@@ -25,8 +25,30 @@ public class Movie implements Parcelable {
     private String mUserRating;
     private String mReleaseDate;
     private String mBackdrop;
+    private double vote_average;
+    private long vote_count;
 
-    public Movie(long mId, String mTitle, String mPoster, String mOverview, String mUserRating, String mReleaseDate, String mBackdrop) {
+    public double getVote_average() {
+        return vote_average;
+    }
+
+    public void setVote_average(double vote_average) {
+        this.vote_average = vote_average;
+    }
+
+    public long getVote_count() {
+        return vote_count;
+    }
+
+    public void setVote_count(long vote_count) {
+        this.vote_count = vote_count;
+    }
+
+    public static Creator<Movie> getCREATOR() {
+        return CREATOR;
+    }
+
+    public Movie(long mId,long count,double avg, String mTitle, String mPoster, String mOverview, String mUserRating, String mReleaseDate, String mBackdrop) {
         this.mId = mId;
         this.mTitle = mTitle;
         this.mPoster = mPoster;
@@ -34,6 +56,8 @@ public class Movie implements Parcelable {
         this.mUserRating = mUserRating;
         this.mReleaseDate = mReleaseDate;
         this.mBackdrop = mBackdrop;
+        this.vote_average = avg;
+        this.vote_count=count;
     }
     private Movie(){
 
@@ -46,6 +70,8 @@ public class Movie implements Parcelable {
         mUserRating = in.readString();
         mReleaseDate = in.readString();
         mBackdrop = in.readString();
+        vote_count = in.readLong();
+        vote_average = in.readDouble();
     }
 
     public long getId() {
